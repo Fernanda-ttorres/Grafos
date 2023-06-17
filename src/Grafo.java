@@ -3,13 +3,14 @@ import java.util.ArrayList;
 public class Grafo<TIPO> {
     private ArrayList<Vertice<TIPO>> vertices;
     private ArrayList<Aresta<TIPO>> arestas;
-    private int nmrvertice = 0;
-    private int maxvertice;
+    private int numVertices = 0;
+    private int maxVertice;
+    private int[][] adjMatrix;
 
     // -------------------------------------------------------------------------------------
 
     public Grafo(int tamanho) {
-        this.maxvertice = tamanho;
+        this.maxVertice = tamanho;
         this.vertices = new ArrayList<Vertice<TIPO>>();
         this.arestas = new ArrayList<Aresta<TIPO>>();
     }
@@ -17,11 +18,22 @@ public class Grafo<TIPO> {
     // -------------------------------------------------------------------------------------
 
     public void adicionarVertice(TIPO dado, int peso) {
-        if (nmrvertice < maxvertice) {
+        if (numVertices < maxVertice) {
             Vertice<TIPO> novoVertice = new Vertice<TIPO>(dado, peso);
             this.vertices.add(novoVertice);
-            nmrvertice++;
+            atualizarMatrizAdjacencia();
+            numVertices++;
         }
+    }
+
+    private void atualizarMatrizAdjacencia() {
+        int[][] novaAdjMatrix = new int[numVertices][numVertices];
+        for (int i = 0; i < numVertices - 1; i++) {
+            for (int j = 0; j < numVertices - 1; j++) {
+                novaAdjMatrix[i][j] = adjMatrix[i][j];
+            }
+        }
+        adjMatrix = novaAdjMatrix;
     }
 
     // -------------------------------------------------------------------------------------
@@ -126,4 +138,33 @@ public class Grafo<TIPO> {
 
     // -------------------------------------------------------------------------------------
 
+
+    public int[][] matrizAdjacencia(Grafo<TIPO> grafo) {
+        int numVertices = grafo.numVertices;
+        int[][] adjMatrix = new int[numVertices][numVertices];
+
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+               if (grafo.checarAdjAresta(grafo.arestas.get(i), grafo.arestas.get(j))){
+                   adjMatrix[i][j] = 1;
+               }
+               else{
+                   adjMatrix[i][j] = 0;
+               }
+            }
+        }
+
+        return adjMatrix;
+    }
+
+    public void printAdjMatrix(int[][] adjMatrix) {
+        int numVertices = adjMatrix.length;
+
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                System.out.print(adjMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 }
