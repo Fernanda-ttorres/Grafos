@@ -1,3 +1,5 @@
+package grafo;
+
 public class Aresta<TIPO> {
     private int peso;
     private Vertice<TIPO> inicio;

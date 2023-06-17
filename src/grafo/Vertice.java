@@ -1,3 +1,5 @@
+package grafo;
+
 import java.util.ArrayList;
 
 public class Vertice<TIPO> {

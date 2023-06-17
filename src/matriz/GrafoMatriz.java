@@ -1,6 +1,11 @@
+package matriz;
+
+import grafo.Aresta;
+import grafo.Vertice;
+
 import java.util.ArrayList;
 
-public class Grafo<TIPO> {
+public class GrafoMatriz<TIPO> {
     private ArrayList<Vertice<TIPO>> vertices;
     private ArrayList<Aresta<TIPO>> arestas;
     private int numVertices = 0;
@@ -9,17 +14,17 @@ public class Grafo<TIPO> {
 
     // -------------------------------------------------------------------------------------
 
-    public Grafo(int tamanho) {
+    public GrafoMatriz(int tamanho) {
         this.maxVertice = tamanho;
-        this.vertices = new ArrayList<Vertice<TIPO>>();
-        this.arestas = new ArrayList<Aresta<TIPO>>();
+        this.vertices = new ArrayList<>();
+        this.arestas = new ArrayList<>();
     }
 
     // -------------------------------------------------------------------------------------
 
     public void adicionarVertice(TIPO dado, int peso) {
         if (numVertices < maxVertice) {
-            Vertice<TIPO> novoVertice = new Vertice<TIPO>(dado, peso);
+            Vertice<TIPO> novoVertice = new Vertice<>(dado, peso);
             this.vertices.add(novoVertice);
             atualizarMatrizAdjacencia();
             numVertices++;
@@ -139,7 +144,7 @@ public class Grafo<TIPO> {
     // -------------------------------------------------------------------------------------
 
 
-    public int[][] matrizAdjacencia(Grafo<TIPO> grafo) {
+    public int[][] matrizAdjacencia(GrafoMatriz<TIPO> grafo) {
         int numVertices = grafo.numVertices;
         int[][] adjMatrix = new int[numVertices][numVertices];
 
