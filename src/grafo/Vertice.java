@@ -7,6 +7,7 @@ public class Vertice<TIPO> {
     private int peso;
     private ArrayList<Aresta<TIPO>> arestasEntrada;
     private ArrayList<Aresta<TIPO>> arestasSaida;
+    private int index;
     
 //-------------------------------------------------------------------------------------
     public Vertice(TIPO valor){
@@ -25,6 +26,16 @@ public class Vertice<TIPO> {
         this.arestasSaida = new ArrayList<Aresta<TIPO>>();
     }
 
+    public Vertice(TIPO valor, int peso, int index){
+        if(peso < 0){
+            peso = 0;
+        }
+        this.dado = valor;
+        this.peso = peso;
+        this.index = index;
+        this.arestasEntrada = new ArrayList<Aresta<TIPO>>();
+        this.arestasSaida = new ArrayList<Aresta<TIPO>>();
+    }
 //-------------------------------------------------------------------------------------
 
     public TIPO getDado() {
@@ -63,6 +74,14 @@ public class Vertice<TIPO> {
 
     public ArrayList<Aresta<TIPO>> getArestasSaida() {
         return arestasSaida;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
 //-------------------------------------------------------------------------------------

@@ -24,19 +24,8 @@ public class GrafoImpl<TIPO> implements Grafo<TIPO> {
         if (numVertices < maxVertice) {
             Vertice<TIPO> novoVertice = new Vertice<TIPO>(dado, peso);
             this.vertices.add(novoVertice);
-            atualizarMatrizAdjacencia();
             numVertices++;
         }
-    }
-
-    private void atualizarMatrizAdjacencia() {
-        int[][] novaAdjMatrix = new int[numVertices][numVertices];
-        for (int i = 0; i < numVertices - 1; i++) {
-            for (int j = 0; j < numVertices - 1; j++) {
-                novaAdjMatrix[i][j] = adjMatrix[i][j];
-            }
-        }
-        adjMatrix = novaAdjMatrix;
     }
 
     // -------------------------------------------------------------------------------------
