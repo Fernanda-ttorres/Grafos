@@ -104,4 +104,26 @@ public class GrafoMatriz<T> implements Grafo<T> {
     public void qtdArestas() {
         System.out.println(this.arestas.size());
     }
+
+    @Override
+    public void removerAresta(T dadoInicio, T dadoFim){
+        Vertice<T> inicio = this.getVertice(dadoInicio);
+        Vertice<T> fim = this.getVertice(dadoFim);
+
+        Aresta<T> aresta = retornaAresta(inicio, fim);
+
+        if (aresta != null) {
+            inicio.removerArestaSaida(aresta);
+            fim.removerArestaEntrada(aresta);
+            this.arestas.remove(aresta);
+
+            int v1 = inicio.getIndex();
+            int v2 = fim.getIndex();
+
+            if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices) {
+                adjMatrix[v1][v2] = 0;
+                adjMatrix[v2][v1] = 0;
+            }
+        }
+    }
 }
