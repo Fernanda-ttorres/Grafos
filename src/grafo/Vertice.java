@@ -84,6 +84,14 @@ public class Vertice<TIPO> {
         this.index = index;
     }
 
+    public void removerArestaSaida(Aresta<TIPO> aresta) {
+        this.arestasSaida.remove(aresta);
+    }
+
+    public void removerArestaEntrada(Aresta<TIPO> aresta) {
+        this.arestasEntrada.remove(aresta);
+    }
+
 //-------------------------------------------------------------------------------------
     
 }

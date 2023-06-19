@@ -54,22 +54,29 @@ public class GrafoMatriz<T> implements Grafo<T> {
 
     @Override
     public Vertice<T> getVertice(T dado) {
-        return vertices.stream().filter(d -> d.getDado().equals(dado)).findFirst().orElse(null);
+        return vertices
+                .stream()
+                .filter(d -> d.getDado().equals(dado))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
-    public boolean buscaAresta(T inicio, T fim) {
+    public boolean retornaArestas(T inicio, T fim) {
         return false;
     }
 
     @Override
     public void buscaEmLargura() {
-
+        //TODO - busca em largura numa matriz de adjacencia?
     }
 
     @Override
     public boolean checarAdjVertice(T verticefilho, T verticepai) {
-        return false;
+        int v1 = this.getVertice(verticefilho).getIndex();
+        int v2 = this.getVertice(verticepai).getIndex();
+
+        return adjMatrix[v1][v2] == 1 && adjMatrix[v2][v1] == 1;
     }
 
     @Override

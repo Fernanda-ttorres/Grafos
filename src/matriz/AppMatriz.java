@@ -24,7 +24,7 @@ public class AppMatriz {
         grafo.qtdArestas();
 
 
-        System.out.println( grafo.buscaAresta("João" , "Lorenzo"));
+        System.out.println( grafo.retornaArestas("João" , "Lorenzo"));
 
     }
 }

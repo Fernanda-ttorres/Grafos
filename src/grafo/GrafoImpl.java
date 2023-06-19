@@ -64,7 +64,16 @@ public class GrafoImpl<TIPO> implements Grafo<TIPO> {
             }
         }
         return false;
-            
+    }
+
+    @Override
+    public Aresta<TIPO> retornaAresta(Vertice<TIPO> inicio, Vertice<TIPO> fim) {
+        for (Aresta<TIPO> aresta : this.arestas) {
+            if (aresta.getInicio().equals(inicio) && aresta.getFim().equals(fim)) {
+                return aresta;
+            }
+        }
+        return null;
     }
 
     // -------------------------------------------------------------------------------------
@@ -139,6 +148,29 @@ public class GrafoImpl<TIPO> implements Grafo<TIPO> {
 
     // -------------------------------------------------------------------------------------
 
+    @Override
+    public void removerAresta( TIPO dadoInicio, TIPO dadoFim){
+        Vertice<TIPO> inicio = this.getVertice(dadoInicio);
+        Vertice<TIPO> fim = this.getVertice(dadoFim);
+
+        Aresta<TIPO> aresta = retornaAresta(inicio, fim);
+
+        if (aresta != null) {
+            inicio.removerArestaSaida(aresta);
+            fim.removerArestaEntrada(aresta);
+            this.arestas.remove(aresta);
+
+            int v1 = inicio.getIndex();
+            int v2 = fim.getIndex();
+
+            if (v1 >= 0 && v1 < numVertices && v2 >= 0 && v2 < numVertices) {
+                adjMatrix[v1][v2] = 0;
+                adjMatrix[v2][v1] = 0;
+            }
+        }
+
+
+    }
 
     public int[][] matrizAdjacencia(GrafoImpl<TIPO> grafo) {
         int numVertices = grafo.numVertices;
